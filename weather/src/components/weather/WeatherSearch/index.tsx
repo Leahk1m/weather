@@ -17,15 +17,26 @@ function WeatherProps({
 }: WeatherSearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      onSearch(searchTerm);
+    }
+  }
+
   return (
-    <div className="flex flex-col gap-4 justify-center items-center">
-      <Input
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="City"
-      />
-      <Button variant="outline">Check weather</Button>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div className="flex flex-col gap-4 justify-center items-center">
+        <Input
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="City"
+        />
+        <Button type="submit" variant="outline">
+          Check weather
+        </Button>
+      </div>
+    </form>
   );
 }
 
