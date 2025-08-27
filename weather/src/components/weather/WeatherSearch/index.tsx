@@ -6,14 +6,16 @@ import { Button } from "@/components/ui/button";
 
 interface WeatherSearchProps {
   onSearch: (city: string) => void;
-  onGetCurrentLocation: () => void;
   isLoading: boolean;
+  error: boolean;
+  setError: (err: boolean) => void;
 }
 
 function WeatherProps({
   onSearch,
-  onGetCurrentLocation,
   isLoading,
+  error,
+  setError,
 }: WeatherSearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -29,10 +31,18 @@ function WeatherProps({
       <div className="flex flex-col gap-4 justify-center items-center">
         <Input
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setError(false);
+            setSearchTerm(e.target.value);
+          }}
           placeholder="City"
         />
-        <Button type="submit" variant="outline">
+        {error ? (
+          <p className="dark:text-red-400 text-sm">
+            Please enter a valid location
+          </p>
+        ) : null}
+        <Button type="submit" variant="outline" disabled={isLoading}>
           Check weather
         </Button>
       </div>

@@ -3,30 +3,30 @@ import React from "react";
 import WeatherSearch from "@/components/weather/WeatherSearch";
 import {
   Card,
-  CardAction,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Cloud } from "lucide-react";
+import { CloudSun } from "lucide-react";
 
 interface WeatherCardProps {
   onSearch: (city: string) => void;
-  onGetCurrentLocation: () => void;
   isLoading: boolean;
+  error: boolean;
+  setError: (err: boolean) => void;
 }
 
 function WeatherCard({
   onSearch,
-  onGetCurrentLocation,
   isLoading,
+  error,
+  setError,
 }: WeatherCardProps) {
   return (
     <Card className="flex flex-col justify-center items-center gap-4 p-10">
       <CardHeader className="flex flex-col justify-center items-center gap-4 w-full">
-        <Cloud />
+        <CloudSun size={50} />
+
         <CardTitle>Let's see the weather!</CardTitle>
       </CardHeader>
       <CardDescription className="flex flex-col justify-center items-center gap-4">
@@ -34,8 +34,9 @@ function WeatherCard({
       </CardDescription>
       <WeatherSearch
         onSearch={onSearch}
-        onGetCurrentLocation={onGetCurrentLocation}
         isLoading={isLoading}
+        error={error}
+        setError={setError}
       />
     </Card>
   );
