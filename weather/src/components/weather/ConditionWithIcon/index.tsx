@@ -2,6 +2,11 @@
 
 import React from "react";
 import { CloudDrizzle, Cloudy, CloudSun, Sun } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export type WeatherCondition = "clear" | "partially cloudy" | "rain";
 
@@ -27,7 +32,12 @@ function ConditionWithIcon({ condition }: ConditionWithIconProps) {
   return (
     <div className="flex flex-col items-center">
       {handleIcon(condition)}
-      <p className="opacity-50">{condition}</p>
+      <Tooltip>
+        <TooltipTrigger>
+          <p className="opacity-50 leading-snug line-clamp-2">{condition}</p>
+        </TooltipTrigger>
+        <TooltipContent>{condition}</TooltipContent>
+      </Tooltip>
     </div>
   );
 }
