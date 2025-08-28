@@ -4,7 +4,6 @@ import WeatherCard from "@/components/weather/WeatherCard";
 import WeatherForecast from "@/components/weather/WeatherForecast";
 import CurrentConditions from "@/components/weather/CurrentConditions";
 import { motion, AnimatePresence } from "motion/react";
-import { Toggle } from "@/components/ui/toggle";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export type Condition = {
@@ -22,7 +21,7 @@ export default function Home() {
   function handleSearch(city: string) {
     setIsLoading(true);
     fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${today}?key=${"Q7DSJK94HGZK4F3KV6H529Q3H"}`
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${today}?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`
     )
       .then((res) => res.json())
       .then((data) => {
