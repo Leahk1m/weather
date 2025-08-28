@@ -4,6 +4,8 @@ import WeatherCard from "@/components/weather/WeatherCard";
 import WeatherForecast from "@/components/weather/WeatherForecast";
 import CurrentConditions from "@/components/weather/CurrentConditions";
 import { motion, AnimatePresence } from "motion/react";
+import { Toggle } from "@/components/ui/toggle";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export type Condition = {
   address: string;
@@ -39,50 +41,52 @@ export default function Home() {
   }
 
   return (
-    <div className="p-30 dark flex flex-col gap-8">
-      <WeatherCard
-        onSearch={handleSearch}
-        isLoading={isLoading}
-        error={error}
-        setError={setError}
-      />
+    <div>
+      <ThemeToggle />
+      <div className="flex p-10 flex-col gap-8">
+        <WeatherCard
+          onSearch={handleSearch}
+          isLoading={isLoading}
+          error={error}
+          setError={setError}
+        />
+        <AnimatePresence>
+          {conditions && (
+            <motion.div
+              key={conditions?.currentConditions}
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 50, opacity: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 20,
+              }}
+            >
+              <CurrentConditions conditions={conditions} />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-      <AnimatePresence>
-        {conditions && (
-          <motion.div
-            key={conditions?.currentConditions}
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 50, opacity: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 100,
-              damping: 20,
-            }}
-          >
-            <CurrentConditions conditions={conditions} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {conditions?.currentConditions && (
-          <motion.div
-            key={conditions.currentConditions}
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 50, opacity: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 100,
-              damping: 20,
-              delay: 0.3,
-            }}
-          >
-            <WeatherForecast forecast={conditions?.currentConditions} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <AnimatePresence>
+          {conditions?.currentConditions && (
+            <motion.div
+              key={conditions.currentConditions}
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 50, opacity: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 20,
+                delay: 0.3,
+              }}
+            >
+              <WeatherForecast forecast={conditions?.currentConditions} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }

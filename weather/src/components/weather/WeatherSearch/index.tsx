@@ -38,7 +38,7 @@ function WeatherProps({
           placeholder="City"
         />
         {error ? (
-          <p className="dark:text-red-400 text-sm">
+          <p className="text-red-400 dark:text-red-400 text-sm">
             Please enter a valid location
           </p>
         ) : null}
