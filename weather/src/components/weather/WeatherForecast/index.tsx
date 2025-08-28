@@ -16,6 +16,8 @@ function WeatherForecast({ forecast }: WeatherForecastProps) {
           <CloudMoon />
           <p className="text-xl font-bold">24 Hour Forecast</p>
         </div>
+
+        <p>{forecast?.description}</p>
       </CardHeader>
 
       <CardContent className="flex flex-row gap-2 overflow-scroll">

@@ -28,22 +28,21 @@ function LocationResult({ conditions }: LocationResultProps) {
       }}
     >
       <Card className="flex flex-row justify-between items-center">
-        <CardHeader>
-          <div className="flex items-center gap-1">
+        <div className="flex flex-col p-6 gap-3">
+          <div className="flex items-center gap-2">
             <MapPin size={16} />
             <p className="text-lg font-bold">{`${address[0].toUpperCase()}${address.slice(
               1
             )}`}</p>
           </div>
-          <CardTitle>
-            <div>
-              <p className="text-xl">{`${temp} ${"\u00b0"}F`}</p>
-              <p className="text-lg font-thin">
-                {conditions?.currentConditions?.conditions}
-              </p>
-            </div>
-          </CardTitle>
-        </CardHeader>
+
+          <div>
+            <p className="text-2xl font-bold">{`${temp} ${"\u00b0"}F`}</p>
+            <p className="text-lg font-thin">
+              {conditions?.currentConditions?.conditions}
+            </p>
+          </div>
+        </div>
 
         <CardContent>
           <div className="flex flex-col gap-2 opacity-50">

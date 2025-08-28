@@ -3,11 +3,14 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { motion } from "motion/react";
+import ConditionWithIcon, {
+  WeatherCondition,
+} from "@/components/weather/ConditionWithIcon";
 
 interface ForecastCardProps {
   time: string;
   temp: string;
-  conditions: string;
+  conditions: WeatherCondition;
 }
 
 function ForecastCard({ time, temp, conditions }: ForecastCardProps) {
@@ -27,7 +30,7 @@ function ForecastCard({ time, temp, conditions }: ForecastCardProps) {
         <div className="flex flex-col p-5 gap-3 py-0 text-center min-w-30">
           <p className="opacity-50">{time}</p>
           <p className="font-bold">{`${temp} ${"\u00b0"}F`}</p>
-          <p className="opacity-50">{conditions}</p>
+          <ConditionWithIcon condition={conditions} />
         </div>
       </Card>
     </motion.div>
