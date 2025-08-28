@@ -32,7 +32,7 @@ export default function Home() {
           setError(false);
         }
       })
-      .catch((err) => {
+      .catch(() => {
         setError(true);
       })
       .finally(() => setIsLoading(false));

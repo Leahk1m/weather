@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { ReactEventHandler, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -19,7 +19,7 @@ function WeatherProps({
 }: WeatherSearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (searchTerm.trim()) {
       onSearch(searchTerm);
